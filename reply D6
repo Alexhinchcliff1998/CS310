@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string> // Added this because we use the string data type below
+using namespace std;
+
+// define an enumeration for pet types
+enum PetType { DOG, CAT, BIRD, FISH };
+
+void askPetInfo() {
+    int choice;     // Changed from PetType to int so user input can be validated first
+    PetType pet;    // Will store the enum value after validation
+    string petName;
+
+    // Ask user to select pet type
+    cout << "Select your pet type (0 = Dog, 1 = Cat, 2 = Bird, 3 = Fish): ";
+    cin >> choice;
+
+    // Added input validation so invalid numbers don't cause odd results
+    if (choice < 0 || choice > 3) {
+        cout << "Invalid choice. Please restart and pick a number between 0 and 3." << endl;
+        return; // Exit function early if invalid input
+    }
+
+    // Convert the user’s numeric input into the enum type safely
+    pet = static_cast<PetType>(choice);
+
+    // Ask for the pet's name
+    cout << "What is your pet's name? ";
+    cin >> petName;
+
+    cout << "You have a ";
+
+    // Changed the if/else chain into a switch statement for better readability
+    switch (pet) {
+        case DOG: 
+            cout << "dog"; 
+            break;
+        case CAT: 
+            cout << "cat"; 
+            break;
+        case BIRD: 
+            cout << "bird"; 
+            break;
+        case FISH: 
+            cout << "fish"; 
+            break;
+        default: 
+            cout << "mystery creature"; 
+            break;
+    }
+
+    // Fixed the variable name from petname -> petName (C++ is case-sensitive)
+    cout << " named " << petName << "!" << endl;
+}
+
+int main() {
+    askPetInfo();
+    return 0;
+}
